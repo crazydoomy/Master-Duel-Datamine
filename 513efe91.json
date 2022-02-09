@@ -1,0 +1,608 @@
+{
+	"informations": [
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0086",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0061",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0082",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0065",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0038",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0030",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_ITEMDESC",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_MATCH_TIPS",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_LIMITREG",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0069",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_MARKUPSHOP",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_ITEMHISTORY",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0034",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0020",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0079",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0024",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_COUNTRY",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0096",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0071",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0092",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0075",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0028",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_CARDPACK",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0004",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0059",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0051",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_GEMSHOP",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0008",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0055",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0041",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0018",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0045",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0010",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0014",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0049",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_HISTORYLOG",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0044",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0019",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_DECKBROWSER",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0040",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_INTRODUCTION",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0048",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0015",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0011",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0058",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SHOP",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0005",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_FRIEND",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_DECKRECIPE",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_STRUCTURELIST",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0054",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0009",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_ENQUETEFIRST",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0050",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_EVENT_NOTIFY",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0025",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0078",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_CREDITGROUP",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_DUEL",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0021",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0029",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0093",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0074",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0097",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0070",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_TUTORIAL",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_EXHIBITION",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0039",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0083",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0064",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_CREDITNAME",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0087",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0060",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_TOURNAMENT",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0035",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0068",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_ITEMMENU",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0031",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_DECKEDIT",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_MENU",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0095",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_PVP",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0072",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0091",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0076",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0023",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_COUNTER",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0099",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_ROOM",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_HOME",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0027",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_PERIODITEM",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0033",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0089",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_PREFERENCE",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIO",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0037",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_RECORD",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0085",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0062",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0081",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0066",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_STRUCTURE_SELECT",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_ENQUETE",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SYS",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_PUBLICDECKSEARCH",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0013",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0017",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0042",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0046",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0052",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0056",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_STANDARD",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0003",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0007",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0057",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0053",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_CREDITPOSITION",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_DECKSELECT",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_CARDMENU",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_PROFILE",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0006",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_DUELPASS",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0002",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0016",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0012",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0047",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_MISSION",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0043",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_ITEM",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0036",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0088",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0032",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_CARD",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0080",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0067",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0084",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0063",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SUBMENU",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SOLO",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0090",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0077",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0094",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0073",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_HELP",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0026",
+			"dependencies": []
+		},
+		{
+			"assetName": "Card/ScriptableObjects/en-US/CardPictureFontSetting",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0098",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCORE",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_GEMHISTORY",
+			"dependencies": []
+		},
+		{
+			"assetName": "Texts/en-US/IDS_SCENARIOGATE0022",
+			"dependencies": []
+		}
+	]
+}

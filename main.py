@@ -1,4 +1,5 @@
 import hashlib
+import io
 import sqlite3
 import urllib.request
 import zlib
@@ -88,9 +89,13 @@ def main():
             # print(diff)
             #get file urls
             downloads = []
+            old_downloads = []
             url_path, sha256 = os.path.split(url)
             for i in [i for i in new_list if i not in old_list]:
                 downloads.append(f"{url_path}/{i['version']}/{i['assetName']}")
+                #get the old version to diff textassets
+                old_asset = next(item for item in old_list if item['assetName'] == i['assetName'])
+                old_downloads.append(f"{url_path}/{old_asset['version']}/{old_asset['assetName']}")
             #save to folder, in the future add this to an async function instead of a for loop
             for i in downloads:
                 #save to url end text + version folder
@@ -112,9 +117,24 @@ def main():
                         if bytedata[0:8] == b"\x59\x44\x4c\x5a\x01\x00\x00\x00":
                             print(f"magic number detected, decompressing '{data.name}'")
                             #decompress data minus header
-                            decompressed = zlib.decompress(bytedata[8:len(bytedata)])
-                            with open(os.path.join(extracted_folder, data.name), "wb") as f:
-                                f.write(decompressed)
+                            decompressed = io.BytesIO(zlib.decompress(bytedata[8:len(bytedata)])[3:])
+                            deserialized = DeserializeText(decompressed)
+                            #list comprehension to get the old url
+                            old_url = [item for item in old_downloads if os.path.split(i)[1] in item]
+                            old_deserialized = []
+                            #if it exists find the new content
+                            if old_url:
+                                old_env = UnityPy.load(urllib.request.urlopen(old_url[0]).read())
+                                for obj in [i for i in old_env.objects if i.type == "TextAsset"]:
+                                    data = obj.read()
+                                    bytedata = bytes(data.script)
+                                    decompressed = io.BytesIO(zlib.decompress(bytedata[8:len(bytedata)])[3:])
+                                    old_deserialized = DeserializeText(decompressed)
+                            #get diff of both
+                            with open(os.path.join(extracted_folder, f"{data.name}.txt"), "w", encoding='utf8') as f:
+                                for i in [i for i in deserialized if i not in old_deserialized]:
+                                    f.write(i[0]+" : " + i[1] + "\n")
+
             print("extracted all assets!")
                         # if obj.serialized_type.nodes:
                         #     # save decoded data
@@ -133,7 +153,34 @@ def main():
                         # with open(os.path.join(version_folder, os.path.split(i)[1]), "wb") as f:
                         #     f.write(urllib.request.urlopen(i).read())
 
-                
+def DeserializeText(bytes):
+    deserialized = []
+    while 1:
+        id_len = bytes.read(1)
+        if not id_len:
+            break
+        identifier = int.from_bytes(id_len, byteorder='big')
+        if identifier > 216:
+            id_len = bytes.read(identifier-216)
+            id_len = int.from_bytes(id_len, byteorder='big')
+        else:
+            id_len = identifier-160
+        id = bytes.read(id_len)
+        
+        #same thing for txt
+        txt_len = bytes.read(1)
+        if not txt_len:
+            break
+        identifier = int.from_bytes(txt_len, byteorder='big')
+        if identifier > 216:
+            txt_len = bytes.read(identifier-216)
+            txt_len = int.from_bytes(txt_len, byteorder='big')
+        else:
+            txt_len = identifier-160
+        txt = bytes.read(txt_len)
+        deserialized.append((id.decode(), txt.decode()))
+    return deserialized
+
 def GetUrlHeaders(url : str):
     response = urllib.request.urlopen(url)
     etag, date = response.headers['ETag'], response.headers['Last-Modified']

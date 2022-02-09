@@ -1,0 +1,1 @@
+BUY_CONFIRM_PICKUPDESC_MESSAGE : <style=alert>*4 out of 8 cards per Card Pack are guaranteed featured cards</style>
