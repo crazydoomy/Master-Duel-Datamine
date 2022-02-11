@@ -1,14 +1,17 @@
 import hashlib
 import io
 import sqlite3
-import urllib.request
+import time
+import aiohttp
 import zlib
 from dateutil.parser import parse as parsedate
 import os
 import json
 import UnityPy
-
-from importlib_metadata import version
+import asyncio
+import urllib.request
+import threading 
+import ssl
 
 db = sqlite3.connect("hashes.db")
 cursor = db.cursor()
@@ -39,8 +42,10 @@ pathlist = ['beta2/PC/cg/tcg/853b6b484ddd2fb1326f6e4cab8979cfc97259c1069ecf99d74
 #                                         modified_date DATE NOT NULL
 #                                     )""")                           
 # db.commit()
+
 def main():
     for i in pathlist:
+        loop = asyncio.get_event_loop()
         url = GetUrlFromPath(i)
         etag, date = GetUrlHeaders(url)
         etag = etag.strip('"')
@@ -55,13 +60,14 @@ def main():
         if not rows:
             newest_file = cursor.execute(f"""SELECT * FROM "{path}" ORDER BY modified_date DESC LIMIT 1""")
             old_etag = newest_file.fetchone()
+            #add the new etag to the db
             sqlite_insert_with_param = f"""INSERT INTO "{path}"
                             (etag, modified_date) 
                             VALUES (?, ?);"""
 
             data_tuple = (etag, date)
             cursor.execute(sqlite_insert_with_param, data_tuple)
-            db.commit()
+            # db.commit()
             print(f"new etag found: {etag}\npath: {path}")
             response = urllib.request.urlopen(url).read()
             path = path.replace('/', '_')
@@ -85,73 +91,76 @@ def main():
                 old = {'informations':[]}
             new_list = new['informations']
             old_list = old['informations']
-            # diff = json.dumps([i for i in new_list if i not in old_list], indent=4)
-            # print(diff)
             #get file urls
             downloads = []
             old_downloads = []
+            # old_list =[]
             url_path, sha256 = os.path.split(url)
+            # downloads.append(f"{url_path}/202111181555/cc/cc3059c3")
             for i in [i for i in new_list if i not in old_list]:
                 downloads.append(f"{url_path}/{i['version']}/{i['assetName']}")
-                #get the old version to diff textassets
+                #get the old asset version
                 old_asset = next(item for item in old_list if item['assetName'] == i['assetName'])
                 old_downloads.append(f"{url_path}/{old_asset['version']}/{old_asset['assetName']}")
             #save to folder, in the future add this to an async function instead of a for loop
-            for i in downloads:
-                #save to url end text + version folder
-                env = UnityPy.load(urllib.request.urlopen(i).read())
-                #make new folder for extracted assets
-                for obj in env.objects:
-                    if obj.type.name in ["Sprite"]: #, "Sprite"
-                        data = obj.read()
-                        dest = os.path.join(extracted_folder, data.name)
-                        # make sure that the extension is correct
-                        # you probably only want to do so with images/textures
-                        dest, ext = os.path.splitext(dest)
-                        dest = dest + ".png"
-                        img = data.image
-                        img.save(dest)
-                    elif obj.type == "TextAsset":
-                        data = obj.read()
-                        bytedata = bytes(data.script)
-                        if bytedata[0:8] == b"\x59\x44\x4c\x5a\x01\x00\x00\x00":
-                            print(f"magic number detected, decompressing '{data.name}'")
-                            #decompress data minus header
-                            decompressed = io.BytesIO(zlib.decompress(bytedata[8:len(bytedata)])[3:])
-                            deserialized = DeserializeText(decompressed)
-                            #list comprehension to get the old url
-                            old_url = [item for item in old_downloads if os.path.split(i)[1] in item]
-                            old_deserialized = []
-                            #if it exists find the new content
-                            if old_url:
-                                old_env = UnityPy.load(urllib.request.urlopen(old_url[0]).read())
-                                for obj in [i for i in old_env.objects if i.type == "TextAsset"]:
-                                    data = obj.read()
-                                    bytedata = bytes(data.script)
-                                    decompressed = io.BytesIO(zlib.decompress(bytedata[8:len(bytedata)])[3:])
-                                    old_deserialized = DeserializeText(decompressed)
-                            #get diff of both
-                            with open(os.path.join(extracted_folder, f"{data.name}.txt"), "w", encoding='utf8') as f:
-                                for i in [i for i in deserialized if i not in old_deserialized]:
-                                    f.write(i[0]+" : " + i[1] + "\n")
+    files = loop.run_until_complete(download_list(downloads, loop))
+    assets = loop.run_until_complete(extract_asset_list(files, extracted_folder, old_downloads))
 
-            print("extracted all assets!")
-                        # if obj.serialized_type.nodes:
-                        #     # save decoded data
-                        #     tree = obj.read_typetree()
-                        #     data = obj.read()
-                        #     fp = os.path.join(extracted_folder, f"{data.name}.json")
-                        #     with open(fp, "wt", encoding = "utf8") as f:
-                        #         json.dump(tree, f, ensure_ascii = False, indent = 4)
-                        # else:
-                        #     # save raw relevant data (without Unity MonoBehaviour header)
-                        #     data = obj.read()
-                        #     fp = os.path.join(extracted_folder, f"{data.name}.bin")
-                        #     with open(fp, "wb") as f:
-                        #         f.write(data.raw_data)
+async def extract_asset(filebytes, filename, folder, old_downloads):
+    env = UnityPy.load(filebytes)
+    for obj in env.objects:
+        if obj.type.name in ["Sprite"]: #, "Sprite"
+            data = obj.read()
+            dest = os.path.join(folder, data.name)
+            # make sure that the extension is correct
+            # you probably only want to do so with images/textures
+            dest, ext = os.path.splitext(dest)
+            dest = dest + ".png"
+            img = data.image
+            img.save(dest)
+        elif obj.type == "TextAsset":
+            data = obj.read()
+            bytedata = bytes(data.script)
+            if bytedata[0:8] == b"\x59\x44\x4c\x5a\x01\x00\x00\x00":
+                print(f"magic number detected, decompressing '{data.name}'")
+                #decompress data minus header
+                decompressed = zlib.decompress(bytedata[8:len(bytedata)])
+                #find index of len before gpr
+                start = io.BytesIO(decompressed[decompressed.find(b'\xa5'):])
+                deserialized = DeserializeText(start)
+                #list comprehension to get the old url
+                old_url = [item for item in old_downloads if filename in item]
+                old_deserialized = []
+                if old_url:
+                    async with aiohttp.ClientSession() as session:
+                        async with session.get(old_url[0]) as response:
+                            data = await response.read()
+                            old_env = UnityPy.load(data)
+                            for obj in [i for i in old_env.objects if i.type == "TextAsset"]:
+                                data = obj.read()
+                                bytedata = bytes(data.script)
+                                decompressed = zlib.decompress(bytedata[8:len(bytedata)]) 
+                                start = io.BytesIO(decompressed[decompressed.find(b'\xa5'):])
+                                old_deserialized = DeserializeText(start)
 
-                        # with open(os.path.join(version_folder, os.path.split(i)[1]), "wb") as f:
-                        #     f.write(urllib.request.urlopen(i).read())
+                with open(os.path.join(folder, f"{data.name}.txt"), "w", encoding='utf8') as f:
+                    #diff the old version and write new content
+                    for i in [i for i in deserialized if i not in old_deserialized]:
+                        f.write(i[0]+" : " + i[1] + "\n")
+                print(f"Wrote to {data.name}.txt")
+
+async def extract_asset_list(files, extracted_folder, old_downloads):
+    results = await asyncio.gather(*[extract_asset(file, filename, extracted_folder, old_downloads) for file, filename in files], return_exceptions=True)  
+    return results    
+        
+async def download(session, url):
+    async with session.get(url) as response:
+        return await response.read(), os.path.split(url)[1]
+
+async def download_list(urls, loop):
+    async with aiohttp.ClientSession(loop=loop) as session:
+        results = await asyncio.gather(*[download(session, url) for url in urls], return_exceptions=True)
+        return results
 
 def DeserializeText(bytes):
     deserialized = []
@@ -209,4 +218,6 @@ def GetUrlFromPath(path : str):
 
 #need to seperate download url from header function and download new file
 if __name__ == '__main__':
+    start_time = time.time()
     main()
+    print("Finished in %s seconds" % (time.time() - start_time))

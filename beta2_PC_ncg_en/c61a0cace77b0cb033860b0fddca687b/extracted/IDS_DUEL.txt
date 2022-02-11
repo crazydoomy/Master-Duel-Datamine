@@ -1,2 +1,0 @@
-COMMAND_ACTIVATION : Activate
-Effect

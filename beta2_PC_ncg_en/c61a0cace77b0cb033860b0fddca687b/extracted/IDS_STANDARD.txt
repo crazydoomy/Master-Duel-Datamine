@@ -1,1 +1,0 @@
-REWARDS_INFO : Upon reaching a new rank during this season {0} , you will receive the corresponding reward.
