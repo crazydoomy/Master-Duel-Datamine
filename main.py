@@ -10,8 +10,6 @@ import json
 import UnityPy
 import asyncio
 import urllib.request
-import threading 
-import ssl
 
 db = sqlite3.connect("hashes.db")
 cursor = db.cursor()
@@ -44,6 +42,7 @@ pathlist = ['beta2/PC/cg/tcg/853b6b484ddd2fb1326f6e4cab8979cfc97259c1069ecf99d74
 # db.commit()
 
 def main():
+    downloads = []
     for i in pathlist:
         loop = asyncio.get_event_loop()
         url = GetUrlFromPath(i)
@@ -52,12 +51,12 @@ def main():
         #get path without hash at the end
         path, sha256 = os.path.split(i)
         #fetch etag
-        rows = cursor.execute(
+        entry = cursor.execute(
             f"""SELECT etag, modified_date FROM "{path}" WHERE etag = ?""",
             (etag,),
         ).fetchall()
         #insert new value
-        if not rows:
+        if not entry:
             newest_file = cursor.execute(f"""SELECT * FROM "{path}" ORDER BY modified_date DESC LIMIT 1""")
             old_etag = newest_file.fetchone()
             #add the new etag to the db
@@ -67,7 +66,7 @@ def main():
 
             data_tuple = (etag, date)
             cursor.execute(sqlite_insert_with_param, data_tuple)
-            # db.commit()
+            db.commit()
             print(f"new etag found: {etag}\npath: {path}")
             response = urllib.request.urlopen(url).read()
             path = path.replace('/', '_')
@@ -92,19 +91,18 @@ def main():
             new_list = new['informations']
             old_list = old['informations']
             #get file urls
-            downloads = []
             old_downloads = []
-            # old_list =[]
             url_path, sha256 = os.path.split(url)
-            # downloads.append(f"{url_path}/202111181555/cc/cc3059c3")
+
             for i in [i for i in new_list if i not in old_list]:
                 downloads.append(f"{url_path}/{i['version']}/{i['assetName']}")
                 #get the old asset version
                 old_asset = next(item for item in old_list if item['assetName'] == i['assetName'])
                 old_downloads.append(f"{url_path}/{old_asset['version']}/{old_asset['assetName']}")
-            #save to folder, in the future add this to an async function instead of a for loop
-    files = loop.run_until_complete(download_list(downloads, loop))
-    assets = loop.run_until_complete(extract_asset_list(files, extracted_folder, old_downloads))
+    #download and extract everything
+    if downloads:
+        files = loop.run_until_complete(download_list(downloads, loop))
+        assets = loop.run_until_complete(extract_asset_list(files, extracted_folder, old_downloads))
 
 async def extract_asset(filebytes, filename, folder, old_downloads):
     env = UnityPy.load(filebytes)
@@ -217,6 +215,7 @@ def GetUrlFromPath(path : str):
     return url
 
 #need to seperate download url from header function and download new file
+#TODO: threading
 if __name__ == '__main__':
     start_time = time.time()
     main()
